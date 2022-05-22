@@ -1,0 +1,11 @@
+.wrapper {
+    height: var(--header-height-defaultUi);
+    box-shadow: 0 1px 1px rgb(0 0 0/12%);
+    display: flex;
+    justify-content: center;
+}
+
+.inner {
+    width: 1150px;
+    background-color: aqua;
+}
