@@ -1,0 +1,83 @@
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    min-width: 100px;
+    justify-content: center;
+    background-color: transparent;
+    transition: all ease-out 0.2s;
+
+
+    span {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 9.5px 0;
+        cursor: pointer;
+    }
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.04);
+    }
+
+}
+
+.primary {
+    color:white;
+    background-color: var(--primary);
+
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),#FE2C55
+    }
+}
+
+.text {
+    color: black;
+    border-color:  rgba(22, 24, 35, 0.12);
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    } 
+}
+
+.big {
+    color: var(--primary);
+    border-color: var(--primary);
+
+    &:hover {
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
+.round {
+    border-radius: 999px;
+    border-color: rgba(22, 24, 35, 0.12);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.disabled {
+    color: white;
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: var(--primary);
+}
+
+.btn + .btn {
+    margin-left: 8px;
+}
+
+.icon {
+    display: block;
+    width: 50px;
+    color: black;
+    text-align: center;
+}
+

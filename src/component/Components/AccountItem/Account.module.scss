@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    padding:  12px;
+    transition: all ease-out 0.2s;
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    h4 {
+        margin-top: 3px;
+        color: rgb(177, 176, 176);
+    }
+
+    &:hover {
+        background-color: rgb(245, 245, 245);
+    }
+}
+
+
+.account-content {
+    margin-left: 12px;
+}
+
+.artist {
+    color: var(--black);
+}
