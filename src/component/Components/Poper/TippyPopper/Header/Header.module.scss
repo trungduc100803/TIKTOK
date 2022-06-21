@@ -1,0 +1,19 @@
+.wrapper{
+    position: relative;
+}
+
+.btn {
+    font-size: 1.1rem;
+    background-color: transparent;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.header-title {
+    padding: 20px 0;
+    text-align: center;
+}

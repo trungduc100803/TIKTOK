@@ -4,10 +4,14 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style)
 
-function MenuItem({data}) {
+function MenuItem({data, onClick}) {
+    let classes = cx('menu', {
+        line: data.line
+    })
+
     return ( 
-        <div className={cx('menu')}>
-            <Button  to={data.to} icon= {data.icon}>
+        <div className={classes}>
+            <Button  to={data.to} icon= {data.icon} onClick = {onClick}>
                 <span className={cx('title')} >{data.title}</span>
             </Button>
         </div>

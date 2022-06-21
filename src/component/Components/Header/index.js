@@ -1,29 +1,47 @@
 import style from  './Header.module.scss';
 import classNames from 'classnames/bind';
-import React, { useEffect, useState } from 'react';
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 import TippyPopper from '../Poper/TippyPopper';
 import Button from '../Button';
-import AccountItem from '../AccountItem';
-import {Wrapper as PopperWrapper} from '../Poper'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from '../Images';
 import {
-    faCircleXmark,
-    faSpinner, 
-    faMagnifyingGlass, 
+    
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
-    faKeyboard
+    faKeyboard,
+    faCloudUpload,
+    faMessage,
+    faUser,
+    faGear,
+    faCoins,
+    faSignOut,
+    faL
 } from '@fortawesome/free-solid-svg-icons'
+import Search from '../Search';
 
 const cx = classNames.bind(style)
-
+const currentUser = true
 const MENU_ITEMS = [
     {
         icon : <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'English'
+        title: 'English',
+        sub: {
+            title: 'language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English'
+                },
+                {
+                    code: 'vi',
+                    title: 'Tiếng Việt'
+                }
+            ]
+        }
     },
     {
         icon : <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -38,15 +56,67 @@ const MENU_ITEMS = [
 
 ]
 
+
+
+const handleOnChange = (item) => {
+    console.log(item)
+}
+
 function Header() {
 
-    const [visible, setVisible] = useState([])
+    
 
-    useEffect( () => {
-        setTimeout(() => {
-            setVisible([1,2,3])
-        },0)
-    },[])
+   
+
+    const userMenu = [
+        {
+            icon : <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/user'
+        },
+        {
+            icon : <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin'
+        },
+        {
+            icon : <FontAwesomeIcon icon={faGear} />,
+            title: 'Setting',
+            to: '/setting'
+        },
+        {
+            icon : <FontAwesomeIcon icon={faEarthAsia} />,
+            title: 'English',
+            sub: {
+                title: 'language',
+                data: [
+                    {
+                        code: 'en',
+                        title: 'English'
+                    },
+                    {
+                        code: 'vi',
+                        title: 'Tiếng Việt'
+                    }
+                ]
+            }
+        },
+        {
+            icon : <FontAwesomeIcon icon={faCircleQuestion} />,
+            title: 'Feedback an help',
+            to: '/feedback'
+        },
+        {
+            icon : <FontAwesomeIcon icon={faKeyboard} />,
+            title: 'Keyboard shortcuts'
+        },
+        {
+            icon : <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            line: true      
+        },
+    ]
 
     return <header className={cx('wrapper')} >
         <div className={cx('inner')} >
@@ -63,48 +133,44 @@ function Header() {
                 </svg>
             </div>
 
-            <Tippy
-                interactive
-                visible={visible.length > 0}
-                render={attrs => (
-                    <div className={cx('search-drop')} tabIndex="-1" {...attrs}>
-                        <PopperWrapper>
-                            <div className={cx('search-drop__container')} >
-                                <div className={cx('search-result')} >
-                                    Result
-                                </div>
-                                <h3 className={cx('search-title')} >Tai khoan</h3>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </div>
-                        </PopperWrapper>
-                    </div>
-                )}
-            >
-                <div className={cx('search')} >
-                    <input  placeholder='Search account and video'spellCheck= {false}/>
-                    <button className={cx('clear')} >
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
-                    <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+            {/* search */}
 
-                    <button className={cx('search-btn')} >
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
-                </div>
-            </Tippy>
+            <Search />
 
-
-
+            {/* neu co user thi hien current user ko co thi hien login */}
             <div className={cx('action')} >
-                <Button text>Upload</Button>
-                <Button primary>Log in</Button>
+                {currentUser ?(
+                    <div  className={cx('current-user')}>
+                        <Tippy content= 'Upload Video'  delay={[0 ,200]}>
+                            <button className={cx('user-btn')} >
+                                <FontAwesomeIcon icon={faCloudUpload} />
+                            </button>
+                        </Tippy>
+                        <Tippy content ='Message' delay={[0 ,200]} >
+                            <button className={cx('user-btn')}>
+                                <FontAwesomeIcon icon={faMessage} />
+                            </button>
+                        </Tippy>
+                    </div>
+                ) : (
+                    <>
+                        <Button text>Upload</Button>
+                        <Button primary>Log in</Button>
 
-                <TippyPopper items = {MENU_ITEMS} >
-                    <button className={cx('more')} >
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </button>
+                    </>
+                )}
+                <TippyPopper items = {currentUser ? userMenu : MENU_ITEMS} onChange ={handleOnChange} >
+                    {currentUser ? (
+                        <Image 
+                            className={cx('avatar-user')} 
+                            alt='user' 
+                            src='https://photo-resize-zmp3.zmdcdn.me/w360_r1x1_jpeg/avatars/9/8/4/d/984de8b3596498462d5f954eadbb1f47.jpg' 
+                        />
+                    ) : (
+                        <button className={cx('more')} >
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    )}
                 </TippyPopper>
             </div>
         </div>
