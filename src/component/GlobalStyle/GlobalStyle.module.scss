@@ -1,5 +1,5 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Hurricane&family=Inter:wght@200;300;400;500;700&family=Lobster&family=Montserrat:wght@200;300;500;600&family=PT+Serif:ital@1&family=Passions+Conflict&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hurricane&family=Inter:wght@200;300;400;500;700;800&family=Lobster&family=Montserrat:wght@200;300;500;600&family=PT+Serif:ital@1&family=Passions+Conflict&display=swap');
 
 :root {
     --white: white;
@@ -19,10 +19,27 @@
 }
 
 body {
+    overflow-y: overlay;
     font-size: 62.5%;
     font-family: 'Montserrat', sans-serif;
     text-rendering: optimizeSpeed;
 }
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
 
 button, input,a {
     text-decoration: none;

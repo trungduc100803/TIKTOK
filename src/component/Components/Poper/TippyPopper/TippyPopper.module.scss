@@ -5,6 +5,11 @@
 }
 
 .more-list {
-    
+    height: 70vh;
+    overflow: hidden;
+}
 
+.list {
+    overflow-y:scroll ;
+    height: 100%;
 }

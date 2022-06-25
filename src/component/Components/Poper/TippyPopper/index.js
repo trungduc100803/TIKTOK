@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(style)
 const def = () => {}
-function TippyPopper({children, items, onChange = def}) {
+function TippyPopper({children, items, hideOnClick = false,  onChange = def}) {
     const [history, setHistory] = useState([{data: items}])
     const current = history[history.length - 1] 
     const renderItem = () => {
@@ -31,8 +31,13 @@ function TippyPopper({children, items, onChange = def}) {
         })
     }
 
+    const resetMenu = () => {
+        setHistory(prev => prev.slice(0,1))
+    }
+
     return (  
         <Tippy
+            hideOnClick = {hideOnClick}
             interactive
             delay={[0, 600]}
             render={attrs => (
@@ -42,12 +47,14 @@ function TippyPopper({children, items, onChange = def}) {
                             {history.length > 1 && <Header title='Language' onBack= {() => {
                                 setHistory(prev => prev.slice(0, prev.length - 1))
                             }} />}
-                            {renderItem()}
+                            <div className={cx('list')}>
+                                {renderItem()}
+                            </div>
                         </div>
                     </Wrapper>
                 </div>
             )}
-            onHide = {() => setHistory(prev => prev.slice(0,1))}
+            onHide = {resetMenu}
         >{children}</Tippy>
     )
 }
